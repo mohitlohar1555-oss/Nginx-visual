@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="An interactive beginner-friendly visualization of NGINX on AWS EC2. #BuildwithMohit">
+  <title>Nginx Server Visual | #BuildwithMohit</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Nginx Server Visual home"><span class="brand-mark">N</span><span>NGINX <b>SERVER VISUAL</b></span></a>
+    <div class="top-actions"><span class="project-tag">AWS EC2 • AMAZON LINUX 2023</span><button id="themeToggle" class="icon-button" aria-label="Toggle light and dark theme">☼ <span>Theme</span></button></div>
+  </header>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <div class="side-heading"><div><p class="eyebrow">LEARNING PATH</p><h1>From request<br>to response.</h1></div><span class="step-count" id="stepCount">01 / 09</span></div>
+      <p class="side-intro">Follow a visitor's journey from their browser to a website hosted on AWS.</p>
+      <nav id="stepNav" class="step-nav" aria-label="Learning steps">
+        <button class="step-link active" data-step="0"><span>01</span><span><b>AWS EC2</b><small>Launch a cloud server</small></span><i>›</i></button>
+        <button class="step-link" data-step="1"><span>02</span><span><b>Security Group</b><small>Control network traffic</small></span><i>›</i></button>
+        <button class="step-link" data-step="2"><span>03</span><span><b>Connect to EC2</b><small>Open a secure terminal</small></span><i>›</i></button>
+        <button class="step-link" data-step="3"><span>04</span><span><b>Install NGINX</b><small>Install the web server</small></span><i>›</i></button>
+        <button class="step-link" data-step="4"><span>05</span><span><b>Start NGINX</b><small>Run the service</small></span><i>›</i></button>
+        <button class="step-link" data-step="5"><span>06</span><span><b>Website files</b><small>Publish the page assets</small></span><i>›</i></button>
+        <button class="step-link" data-step="6"><span>07</span><span><b>Browser request</b><small>Send HTTP on port 80</small></span><i>›</i></button>
+        <button class="step-link" data-step="7"><span>08</span><span><b>NGINX response</b><small>Return website files</small></span><i>›</i></button>
+        <button class="step-link" data-step="8"><span>09</span><span><b>Troubleshooting</b><small>Check the common issues</small></span><i>›</i></button>
+      </nav>
+      <div class="sidebar-footer"><span class="pulse-dot"></span> Interactive lab <span class="footer-hash">#BuildwithMohit</span></div>
+    </aside>
+    <section class="workspace">
+      <section class="lesson-panel">
+        <div class="lesson-top"><span class="section-kicker" id="stepKicker">STEP 01 · CLOUD INFRASTRUCTURE</span><span class="status-pill"><span class="pulse-dot"></span> VISUAL MODE</span></div>
+        <div class="lesson-copy"><h2 id="stepTitle">Launch an AWS EC2 instance</h2><p id="stepDesc">Think of EC2 as a computer you rent in the cloud. It will host the web server and website files.</p></div>
+        <div class="diagram-wrap">
+          <div class="diagram-label"><span>REQUEST JOURNEY</span><span class="diagram-live"><span class="pulse-dot"></span> LIVE DIAGRAM</span></div>
+          <svg id="infraDiagram" viewBox="0 0 900 320" role="img" aria-label="Animated diagram showing browser, internet, AWS security group, EC2 and NGINX">
+            <defs>
+              <linearGradient id="awsGlow" x1="0" x2="1"><stop offset="0" stop-color="#e50914" stop-opacity=".18"/><stop offset="1" stop-color="#ff4b55" stop-opacity=".03"/></linearGradient>
+              <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f0444e"/></marker>
+              <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#37c98a"/></marker>
+            </defs>
+            <rect x="12" y="12" width="876" height="296" rx="18" class="diagram-bg"/>
+            <rect x="390" y="30" width="475" height="258" rx="16" class="aws-boundary"/>
+            <text x="410" y="53" class="diagram-small">AWS CLOUD · REGION</text>
+            <g class="node" id="nodeBrowser" transform="translate(35 112)">
+              <rect width="145" height="105" rx="12" class="node-card"/>
+              <rect x="13" y="13" width="119" height="15" rx="4" class="browser-bar"/>
+              <circle cx="22" cy="20" r="2.5" fill="#e50914"/><circle cx="31" cy="20" r="2.5" fill="#f4b740"/><circle cx="40" cy="20" r="2.5" fill="#37c98a"/>
+              <path d="M24 51h96M24 64h70M24 77h82" class="node-lines"/>
+              <text x="72" y="96" text-anchor="middle" class="node-label">VISITOR BROWSER</text>
+            </g>
+            <g class="node" id="nodeInternet" transform="translate(218 122)">
+              <circle cx="48" cy="39" r="34" class="internet-circle"/>
+              <ellipse cx="48" cy="39" rx="15" ry="34" class="globe-line"/>
+              <path d="M15 39h66M23 22h50M23 56h50" class="globe-line"/>
+              <text x="48" y="91" text-anchor="middle" class="node-label">INTERNET</text>
+            </g>
+            <g class="node" id="nodeSecurity" transform="translate(405 111)">
+              <rect width="126" height="108" rx="12" class="node-card"/>
+              <path d="M63 18l25 9v21c0 19-13 29-25 35-12-6-25-16-25-35V27z" class="shield"/>
+              <path d="M51 49l8 8 16-18" class="shield-check"/>
+              <text x="63" y="96" text-anchor="middle" class="node-label">SECURITY GROUP</text>
+            </g>
+            <g class="node" id="nodeEC2" transform="translate(568 95)">
+              <rect width="130" height="140" rx="12" class="ec2-card"/>
+              <rect x="20" y="19" width="90" height="75" rx="7" class="server-face"/>
+              <path d="M31 35h68M31 51h68M31 67h68" class="server-line"/>
+              <circle cx="99" cy="35" r="3" fill="#37c98a"/><circle cx="99" cy="51" r="3" fill="#37c98a"/><circle cx="99" cy="67" r="3" fill="#37c98a"/>
+              <text x="65" y="115" text-anchor="middle" class="node-label">EC2 INSTANCE</text>
+              <text x="65" y="129" text-anchor="middle" class="node-sub">Amazon Linux 2023</text>
+            </g>
+            <g class="node" id="nodeNginx" transform="translate(730 116)">
+              <rect width="120" height="100" rx="12" class="nginx-card"/>
+              <circle cx="60" cy="34" r="19" class="nginx-ring"/><text x="60" y="40" text-anchor="middle" class="nginx-n">N</text>
+              <text x="60" y="72" text-anchor="middle" class="node-label">NGINX</text><text x="60" y="86" text-anchor="middle" class="node-sub">PORT 80</text>
+            </g>
+            <path d="M180 165H216" class="route-line" marker-end="url(#arrowRed)"/>
+            <path d="M300 165H403" class="route-line" marker-end="url(#arrowRed)"/>
+            <path d="M531 165H566" class="route-line" marker-end="url(#arrowRed)"/>
+            <path d="M698 165H728" class="route-line" marker-end="url(#arrowRed)"/>
+            <path d="M790 220V265H105V220" class="response-line" marker-end="url(#arrowGreen)"/>
+            <text x="451" y="281" text-anchor="middle" class="response-label">HTML · CSS · JS · IMAGES ← RESPONSE</text>
+            <circle id="packet" r="6" cx="180" cy="165" class="packet"/>
+            <circle id="packetBack" r="5" cx="790" cy="265" class="packet-back"/>
+            <g transform="translate(586 25)"><rect width="112" height="24" rx="12" class="port-tag"/><text x="56" y="16" text-anchor="middle" class="port-text" id="diagramPort">TCP : 80</text></g>
+          </svg>
+          <div class="diagram-legend"><span><i class="legend-red"></i> HTTP request</span><span><i class="legend-green"></i> Server response</span><span><i class="legend-gray"></i> Infrastructure</span></div>
+        </div>
+        <div class="caption-card"><div class="caption-icon" id="captionIcon">☁</div><div class="caption-content"><span class="section-kicker">WHAT'S HAPPENING?</span><h3 id="captionTitle">Rent a computer in the cloud</h3><p id="captionText">EC2 is a virtual server. Choose Amazon Linux 2023 and a suitable instance size, then assign a public IPv4 address if you want to reach it from the internet.</p><div class="analogy"><b>REAL-LIFE ANALOGY</b><span id="analogyText">EC2 is like renting a shop building where your website can operate.</span></div></div></div>
+        <div class="lesson-controls"><button class="control-button secondary" id="resetBtn">↺ Reset</button><button class="control-button secondary" id="playBtn">Ⅱ Pause</button><div class="control-spacer"></div><button class="control-button primary" id="prevBtn">← Previous</button><button class="control-button primary" id="nextBtn">Next step →</button></div>
+        <div class="command-panel"><div class="command-heading"><div><span class="section-kicker">TERMINAL / CONSOLE</span><h3 id="commandTitle">Launch checklist</h3></div><button id="copyCommand" class="copy-button">Copy command</button></div><pre><code id="commandText">1. Choose Amazon Linux 2023
+2. Configure a security group
+3. Create or select an SSH key pair</code></pre><p class="command-note" id="commandNote">AWS console steps are shown as a checklist. Commands are examples for your own lab environment.</p></div>
+      </section>
+      <section class="preview-panel">
+        <div class="preview-header"><div><span class="section-kicker">LIVE WEBSITE PREVIEW</span><h2>StreamFlix <span class="preview-badge">DEMO</span></h2></div><span class="preview-online"><i></i> Preview online</span></div>
+        <div class="browser-frame">
+          <div class="mini-browser-bar"><span class="mini-dots"><i></i><i></i><i></i></span><div class="address-bar"><span>⌑</span> http://your-ec2-public-ip/</div><span class="lock-icon">↗</span></div>
+          <div class="stream-page">
+            <div class="stream-nav"><div class="stream-logo">STREAM<span>FLIX</span></div><nav><a href="#featured">Home</a><a href="#series">Series</a><a href="#movies">Movies</a><a href="#mylist">My List</a></nav><button class="avatar">M</button></div>
+            <div class="hero" id="featured"><div class="hero-art"><div class="hero-orb"></div><div class="hero-mountain m1"></div><div class="hero-mountain m2"></div><div class="hero-silhouette"></div><div class="hero-grain"></div></div><div class="hero-content"><span class="hero-label">S T R E A M F L I X  O R I G I N A L</span><h3>BEYOND<br><em>THE HORIZON</em></h3><p>One journey. A thousand possibilities. The story is only beginning.</p><div class="hero-buttons"><button id="watchBtn" class="watch-btn">▶ Play</button><button id="infoBtn" class="info-btn">ⓘ More Info</button></div><span class="hero-rating">★ 98% Match &nbsp; 2026 &nbsp; 4K</span></div><span class="hero-age">16+</span></div>
+            <div class="catalog" id="series"><h4>Popular on StreamFlix <span>›</span></h4><div class="poster-row" id="posterRow">
+              <button class="poster poster-one" data-name="Crimson Peak"><span class="poster-no">01</span><span class="poster-title">CRIMSON<br>PEAK</span><small>THRILLER</small></button>
+              <button class="poster poster-two" data-name="Neon City"><span class="poster-no">02</span><span class="poster-title">NEON<br>CITY</span><small>SCI-FI</small></button>
+              <button class="poster poster-three" data-name="Wild Earth"><span class="poster-no">03</span><span class="poster-title">WILD<br>EARTH</span><small>ADVENTURE</small></button>
+              <button class="poster poster-four" data-name="The Last Signal"><span class="poster-no">04</span><span class="poster-title">THE LAST<br>SIGNAL</span><small>MYSTERY</small></button>
+              <button class="poster poster-five" data-name="Blue Ember"><span class="poster-no">05</span><span class="poster-title">BLUE<br>EMBER</span><small>DRAMA</small></button>
+            </div><p class="preview-footnote">Fictional titles · Original CSS artwork · Learning demo</p></div>
+          </div>
+        </div>
+        <div class="preview-note"><span class="note-icon">ⓘ</span><p><b>Learning project, not Netflix.</b> StreamFlix is a fictional streaming brand with original CSS artwork. No Netflix logos, source code, or copyrighted poster images are used.</p></div>
+        <div class="quick-facts"><div><span class="fact-icon">↗</span><b>HTTP</b><small>Port 80</small></div><div><span class="fact-icon">▣</span><b>NGINX</b><small>Web server</small></div><div><span class="fact-icon">☁</span><b>EC2</b><small>Cloud compute</small></div></div>
+      </section>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer class="site-footer"><span>Built for cloud learners · #BuildwithMohit</span><span>Educational simulation · No AWS resources are created by this page</span></footer>
+  <script src="js/app.js"></script>
+</body>
+</html>
